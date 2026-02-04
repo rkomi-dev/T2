@@ -1,0 +1,12 @@
+
+.registrazione-pane {
+	-fx-background-color: white;
+    -fx-border-color: #0078d7;
+    -fx-border-width: 2;
+    -fx-background-radius: 10;
+}
+
+.label-titolo {
+    -fx-text-fill: green;
+    -fx-font-size: 24px;
+}

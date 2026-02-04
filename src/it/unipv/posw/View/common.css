@@ -1,0 +1,59 @@
+/* Definiamo i parametri globali per tutta l'applicazione */
+.root {
+	-fx-background-image: url("sfondo_TicketTwo.png");
+	-fx-background-size: cover;
+    
+    /* Mantiene l'immagine al centro durante il ridimensionamento */
+    /*-fx-background-position: center center;*/
+    
+    /* Impedisce all'immagine di ripetersi se la finestra è enorme */
+    -fx-background-repeat: no-repeat;
+    /* Tavolozza Colori */
+    -fx-accent-color: #0078d7;       /* Blu TicketTwo */
+    -fx-bg-color: #fcfcfc;           /* Grigio chiarissimo */
+    -fx-text-main: #2c3e50;          /* Blu scuro per i testi */
+    -fx-error-color: #e74c3c;        /* Rosso per errori */
+    
+    /* Font e testi */
+    -fx-font-family: "Segoe UI", system-ui, sans-serif;
+    -fx-font-size: 13px;
+}
+
+/* Stile per tutti i bottoni principali del progetto */
+.button-primary {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+.button-primary:hover { -fx-background-color: #005a9e; }
+
+/* Stile per i campi di testo (TextField e PasswordField) */
+.text-input {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 6;
+}
+.text-input:focused {
+    -fx-border-color: -fx-accent-color;
+    -fx-border-width: 1.5;
+}
+
+/* Titoli delle sezioni */
+.section-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-main;
+}
+
+/* Stile per i DatePicker */
+.date-picker {
+    -fx-background-color: transparent;
+}
+.date-picker > .text-field {
+    -fx-border-color: #bdc3c7;
+}
