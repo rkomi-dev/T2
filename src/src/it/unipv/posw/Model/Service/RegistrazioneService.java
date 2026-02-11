@@ -1,4 +1,4 @@
-package it.unipv.posw.Service;
+package it.unipv.posw.Model.Service;
 
 import it.unipv.posw.Model.Cliente;
 import it.unipv.posw.Persistence.DAO.ClienteDAO;

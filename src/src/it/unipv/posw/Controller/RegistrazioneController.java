@@ -1,7 +1,7 @@
 package it.unipv.posw.Controller;
 
 import it.unipv.posw.Model.Cliente;
-import it.unipv.posw.Service.RegistrazioneService;
+import it.unipv.posw.Model.Service.RegistrazioneService;
 import it.unipv.posw.View.RegistrazioneView;
 import javafx.scene.control.Alert;
 

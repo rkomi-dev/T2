@@ -12,16 +12,17 @@ public class HomeView extends BorderPane {
     public MenuItem itemHome = new MenuItem("Home");
     public MenuItem itemLogin = new MenuItem("Login cliente");
     public MenuItem itemRegistrati = new MenuItem("Registrati");
+    public HBox topBar;
     private RicercaView ricercaView;
     
     // Label per lo stato del login (in alto a sinistra)
-    public Label lblStatoUtente = new Label("Ospite");
+    //public Label lblStatoUtente = new Label("Ospite");
 
     public HomeView() {
         // Applichiamo i CSS
         this.getStylesheets().add(getClass().getResource("common.css").toExternalForm());
         this.getStyleClass().add("root");
-        ricercaView = new RicercaView();
+        //ricercaView = new RicercaView();
         
         // Configurazione Menu
         menuAccount.getItems().addAll(itemHome, itemLogin, itemRegistrati);
@@ -39,22 +40,27 @@ public class HomeView extends BorderPane {
 
         // Modifichiamo la topBar per includere la ricerca
         // Struttura: [Menu] [Molla] [Ricerca] [Molla] [Utente]
-        HBox topBar = new HBox(menuBar, spacerSinistra, ricercaView, spacerDestra, lblStatoUtente);
+        topBar = new HBox(menuBar, spacerSinistra,ViewFactory.getInstance().creaRicercaView() , spacerDestra);//, lblStatoUtente);
         topBar.setAlignment(Pos.CENTER);
         topBar.setPadding(new Insets(10));
         
-        this.setTop(topBar);
-        topBar.setStyle("-fx-padding: 10; -fx-background-color: #eeeeee; -fx-alignment: CENTER_LEFT;");
+        //this.setTop(topBar);
+        topBar.setStyle("-fx-padding: 10; -fx-background-color: white; -fx-alignment: CENTER_LEFT;");
         
         this.setTop(topBar);
         
-        // Messaggio di benvenuto centrale di default
-        this.setCenter(new Label("Benvenuto su TicketTwo! Usa il menu per iniziare."));
+        
     }
 
 	public RicercaView getRicercaView() {
 		return ricercaView;
 	}
+
+	public HBox getTopBar() {
+		return topBar;
+	}
+	
+	
     
     
 }
