@@ -3,6 +3,7 @@ package it.unipv.posw.Controller;
 import it.unipv.posw.Model.Cliente;
 import it.unipv.posw.Model.Service.RegistrazioneService;
 import it.unipv.posw.View.RegistrazioneView;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 
 public class RegistrazioneController {
@@ -13,11 +14,11 @@ public class RegistrazioneController {
         this.view = view;
         this.rService = new RegistrazioneService();
 
-        // Colleghiamo l'evento al bottone programmaticamente
-        this.view.btnRegistrati.setOnAction(e -> gestisciRegistrazione());
+        
+        this.view.btnRegistrati.setOnAction(this::gestisciRegistrazione);
     }
 
-    private void gestisciRegistrazione() {
+    private void gestisciRegistrazione(ActionEvent e) {
         // Creazione oggetto modello con i dati della view
         Cliente c = new Cliente(
           

@@ -1,8 +1,13 @@
-package it.unipv.posw.View;
+package it.unipv.posw.Controller;
 
-import it.unipv.posw.Controller.AutenticazioneController;
-import it.unipv.posw.Controller.RegistrazioneController;
-import it.unipv.posw.Controller.RicercaController;
+import java.util.List;
+
+import it.unipv.posw.Model.Evento;
+import it.unipv.posw.View.AutenticazioneView;
+import it.unipv.posw.View.EventiPerArtistaView;
+import it.unipv.posw.View.EventoView;
+import it.unipv.posw.View.RegistrazioneView;
+import it.unipv.posw.View.RicercaView;
 
 public class ViewFactory {
 
@@ -39,5 +44,16 @@ public class ViewFactory {
         RicercaView view = new RicercaView();
         new RicercaController(view);
         return view;
+    }
+    
+    public EventiPerArtistaView creaEventiPerArtistaView(String artista, List<?> e) {
+    	EventiPerArtistaView view = new EventiPerArtistaView(artista, e);
+    	new EventiPerArtistaController(view, e);
+    	return view;
+    }
+    
+    public EventoView creaEventoView(Evento e) {
+    	EventoView view = new EventoView(e);
+    	return view;
     }
 }

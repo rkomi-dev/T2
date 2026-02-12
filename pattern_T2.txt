@@ -1,0 +1,4 @@
+Factory: view
+Singleton: DBconnection, Navigatore
+Strategy: ricerca
+DAO

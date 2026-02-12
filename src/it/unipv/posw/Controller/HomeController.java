@@ -1,7 +1,6 @@
 package it.unipv.posw.Controller;
 
 import it.unipv.posw.View.HomeView;
-import it.unipv.posw.View.ViewFactory;
 import javafx.event.ActionEvent;
 
 public class HomeController {

@@ -1,5 +1,6 @@
 package it.unipv.posw.View;
 
+import it.unipv.posw.Controller.ViewFactory;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;

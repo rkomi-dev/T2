@@ -10,6 +10,7 @@ public class Evento {
 	private String tipologia;
 	private String id_sede;
 	private String email_organizztore;
+	private int id_artista; 
 	/**
 	 * @param id_evento
 	 * @param nome
@@ -19,7 +20,7 @@ public class Evento {
 	 * @param email_organizztore
 	 */
 	public Evento(int id_evento, String nome, LocalDateTime dataora, String tipologia, String id_sede,
-			String email_organizztore) {
+			String email_organizztore, int id_artista) {
 		super();
 		this.id_evento = id_evento;
 		this.nome = nome;
@@ -27,6 +28,8 @@ public class Evento {
 		this.tipologia = tipologia;
 		this.id_sede = id_sede;
 		this.email_organizztore = email_organizztore;
+		this.id_artista = id_artista;
+		
 	}
 	public int getId_evento() {
 		return id_evento;
@@ -63,6 +66,9 @@ public class Evento {
 	}
 	public void setEmail_organizztore(String email_organizztore) {
 		this.email_organizztore = email_organizztore;
+	}
+	public int getId_Artista() {
+		return id_artista;
 	}
 	
 	

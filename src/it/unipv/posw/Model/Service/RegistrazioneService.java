@@ -4,9 +4,15 @@ import it.unipv.posw.Model.Cliente;
 import it.unipv.posw.Persistence.DAO.ClienteDAO;
 
 public class RegistrazioneService {
-    private ClienteDAO clienteDAO = new ClienteDAO();
+    private ClienteDAO clienteDAO;
+    
+	public RegistrazioneService() {
+		this.clienteDAO = new ClienteDAO();
+	}
 
-    public String registraNuovoCliente(Cliente cliente) {
+
+
+	public String registraNuovoCliente(Cliente cliente) {
         // Logica di Business: Esempio di validazione
         if (cliente.getEmail().isEmpty() || !cliente.getEmail().contains("@")) {
             return "Email non valida!";

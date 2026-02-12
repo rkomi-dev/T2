@@ -1,7 +1,9 @@
 package it.unipv.posw.Controller;
 
+import java.util.List;
+
+import it.unipv.posw.Model.Evento;
 import it.unipv.posw.View.HomeView;
-import it.unipv.posw.View.ViewFactory;
 
 public class NavigazioneController {
 	
@@ -33,7 +35,13 @@ public class NavigazioneController {
         homeView.setCenter(null);
     }
 
-  
+    public void apriEventiPerArtista(String artista, List <?> e) {
+    	homeView.setCenter(ViewFactory.getInstance().creaEventiPerArtistaView(artista, e));
+    }
+    
+    public void apriEvento(Evento e) {
+    	homeView.setCenter(ViewFactory.getInstance().creaEventoView(e));
+    }
 }
 
 

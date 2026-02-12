@@ -2,26 +2,32 @@ package it.unipv.posw.Persistence.DAO;
 
 import it.unipv.posw.Model.Cliente;
 import it.unipv.posw.Persistence.DBConnection;
+import it.unipv.posw.Persistence.DAO.Interface.IClienteDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ClienteDAO {
+public class ClienteDAO implements IClienteDAO {
+	
+	private Connection c;
+	
+	public ClienteDAO() {
+	}
 
+	@Override
     public boolean salvaCliente(Cliente cliente) {
-        Connection conn = null;
         PreparedStatement pstmt = null;
         String query = "INSERT INTO Utente (nome, cognome, email, password, data_nascita) VALUES (?, ?, ?, ?, ?)";
 
         try {
             // Utilizziamo il tuo metodo startConnection
-            conn = DBConnection.startConnection(null, "TicketTwo");
+            c = DBConnection.getInstance().startConnection();
             
-            if (conn == null) return false;
+            if (c == null) return false;
 
-            pstmt = conn.prepareStatement(query);
+            pstmt = c.prepareStatement(query);
     
             pstmt.setString(1, cliente.getNome());
             pstmt.setString(2, cliente.getCognome());
@@ -30,20 +36,21 @@ public class ClienteDAO {
             pstmt.setDate(5, java.sql.Date.valueOf(cliente.getData_nascita()));
 
             int result = pstmt.executeUpdate();
+            DBConnection.getInstance().closeConnection(c);
             return result > 0; // Ritorna true se l'inserimento è riuscito
 
         } catch (SQLException e) {
             System.err.println("Errore durante la registrazione: " + e.getMessage());
             return false;
         } finally {
-            // Ricordati di chiudere sempre le risorse
-            try { if (pstmt != null) pstmt.close(); } catch (SQLException e) {}
-            DBConnection.closeConnection(conn);
+            DBConnection.getInstance().closeConnection(c);
         }
+          
     }
     
+    
+	@Override
     public Cliente trovaClientePerEmail(String email) {
-        Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Cliente cliente = null;
@@ -51,8 +58,8 @@ public class ClienteDAO {
         String query = "SELECT * FROM Utente WHERE email = ?";
 
         try {
-            conn = DBConnection.startConnection(null, "TicketTwo");
-            pstmt = conn.prepareStatement(query);
+            c = DBConnection.getInstance().startConnection();
+            pstmt = c.prepareStatement(query);
             pstmt.setString(1, email);
             rs = pstmt.executeQuery();
 
@@ -70,7 +77,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnection.closeConnection(conn);
+            DBConnection.getInstance().closeConnection(c);
         }
         return cliente;
     }
