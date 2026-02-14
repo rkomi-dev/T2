@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.unipv.posw.Model.Evento;
 import it.unipv.posw.View.AutenticazioneView;
+import it.unipv.posw.View.CarrelloView;
 import it.unipv.posw.View.EventiPerArtistaView;
 import it.unipv.posw.View.EventoView;
 import it.unipv.posw.View.RegistrazioneView;
@@ -54,6 +55,13 @@ public class ViewFactory {
     
     public EventoView creaEventoView(Evento e) {
     	EventoView view = new EventoView(e);
+    	new EventoController(view, e);
+    	return view;
+    }
+    
+    public CarrelloView creaCarrelloView() {
+    	CarrelloView view = new CarrelloView();
+    	new CarrelloController(view);
     	return view;
     }
 }

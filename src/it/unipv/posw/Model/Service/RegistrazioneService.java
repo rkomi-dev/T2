@@ -1,5 +1,7 @@
 package it.unipv.posw.Model.Service;
 
+import it.unipv.posw.Exception.EmptyFieldException;
+import it.unipv.posw.Exception.WrongEmailFormatException;
 import it.unipv.posw.Model.Cliente;
 import it.unipv.posw.Persistence.DAO.ClienteDAO;
 
@@ -10,21 +12,17 @@ public class RegistrazioneService {
 		this.clienteDAO = new ClienteDAO();
 	}
 
-
-
-	public String registraNuovoCliente(Cliente cliente) {
+	public void registraNuovoCliente(Cliente cliente) throws EmptyFieldException, WrongEmailFormatException {
         // Logica di Business: Esempio di validazione
-        if (cliente.getEmail().isEmpty() || !cliente.getEmail().contains("@")) {
-            return "Email non valida!";
+        if (cliente.getEmail().isEmpty()) {
+            throw new EmptyFieldException();
         }
         
-        // Chiamata al DAO
-        boolean successo = clienteDAO.salvaCliente(cliente);
-        
-        if (successo) {
-            return "OK";
-        } else {
-            return "Errore: Email già esistente o problema al server.";
+        if(!cliente.getEmail().contains("@")) {
+        	throw new WrongEmailFormatException();
         }
+        
+        clienteDAO.salvaCliente(cliente);
+       
     }
 }

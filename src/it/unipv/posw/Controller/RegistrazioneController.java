@@ -1,7 +1,10 @@
 package it.unipv.posw.Controller;
 
+import it.unipv.posw.Exception.EmptyFieldException;
+import it.unipv.posw.Exception.WrongEmailFormatException;
 import it.unipv.posw.Model.Cliente;
 import it.unipv.posw.Model.Service.RegistrazioneService;
+import it.unipv.posw.View.AlertView;
 import it.unipv.posw.View.RegistrazioneView;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -29,13 +32,16 @@ public class RegistrazioneController {
             view.txtPassword.getText()
         );
 
-        // Chiamata al service (Logica di Business)
-        String esito = rService.registraNuovoCliente(c);
+        // Chiamata al service 
+        
+        try {
+        	rService.registraNuovoCliente(c);
+        }catch (EmptyFieldException ex) {
+        	AlertView.mostraErrore(ex.getMessage());
+        }catch (WrongEmailFormatException ex) {
+        	AlertView.mostraErrore(ex.getMessage());
+        }
 
-        // Feedback all'utente tramite Alert (RNF8 - Usabilità)
-        Alert alert = new Alert(esito.equals("OK") ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setContentText(esito.equals("OK") ? "Registrazione completata!" : esito);
-        alert.showAndWait();
+       
     }
 }

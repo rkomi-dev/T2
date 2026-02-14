@@ -42,6 +42,10 @@ public class NavigazioneController {
     public void apriEvento(Evento e) {
     	homeView.setCenter(ViewFactory.getInstance().creaEventoView(e));
     }
+    
+    public void apriCarrello() {
+    	homeView.setCenter(ViewFactory.getInstance().creaCarrelloView());
+    }
 }
 
 

@@ -1,5 +1,8 @@
 package it.unipv.posw.View;
 
+import java.time.format.DateTimeFormatter;
+
+
 import it.unipv.posw.Model.Evento;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -12,6 +15,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class EventoView extends HBox {
+	ComboBox<String> comboBiglietti;
+	Button btnAggiungi;
+	Button btnCarrello;
+	ComboBox<String> comboQuantita;
 
     public EventoView(Evento evento) {
         // Layout principale
@@ -25,7 +32,7 @@ public class EventoView extends HBox {
         infoBox.setSpacing(5);
         
         Label lblNome = new Label(evento.getNome());
-        Label lblData = new Label(evento.getDataora().toString());
+        Label lblData = new Label(evento.getDataora().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 
         infoBox.getChildren().addAll(lblNome, lblData);
         HBox.setHgrow(infoBox, Priority.ALWAYS);
@@ -37,7 +44,7 @@ public class EventoView extends HBox {
 
         Label lblScelta = new Label("Tipologia biglietto:");
         
-        ComboBox<String> comboBiglietti = new ComboBox<>();
+        comboBiglietti = new ComboBox<>();
         comboBiglietti.setItems(FXCollections.observableArrayList(
             "VIP", 
             "STANDARD", 
@@ -45,11 +52,34 @@ public class EventoView extends HBox {
         ));
         comboBiglietti.getSelectionModel().select("STANDARD");
 
-        Button btnSeleziona = new Button("Seleziona");
-
-        actionBox.getChildren().addAll(lblScelta, comboBiglietti, btnSeleziona);
+        btnCarrello = new Button("Vai al carrello");
+        btnAggiungi = new Button("Aggiungi al carrello");
+        Label lblQuantita = new Label("Quantità:");
+        comboQuantita = new ComboBox<>();
+        comboQuantita.setItems(FXCollections.observableArrayList("1", "2", "3", "4"));
+        comboQuantita.getSelectionModel().select("1");
+        
+        actionBox.getChildren().addAll(lblScelta, comboBiglietti, lblQuantita, comboQuantita, btnAggiungi, btnCarrello);
 
         // Uniamo tutto
         this.getChildren().addAll(infoBox, actionBox);
     }
+
+	public ComboBox<String> getComboBiglietti() {
+		return comboBiglietti;
+	}
+
+	public Button getBtnAggiungi() {
+		return btnAggiungi;
+	}
+
+	public Button getBtnCarrello() {
+		return btnCarrello;
+	}
+
+	public ComboBox<String> getComboQuantita() {
+		return comboQuantita;
+	}
+    
+    
 }
