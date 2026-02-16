@@ -23,7 +23,7 @@ public class DBConnection {
     private DBConnection() {
     	Properties p = new Properties(System.getProperties());
         try {
-            p.load(new FileInputStream("src/properties"));
+            p.load(new FileInputStream("src/Properties/properties"));
             username = p.getProperty(PROPERTYNAME);
             password = p.getProperty(PROPERTYPSW);
             dbDriver = p.getProperty(PROPERTYDBDRIVER);

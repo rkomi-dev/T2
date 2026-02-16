@@ -25,7 +25,7 @@ public class EventoView extends HBox {
         this.setPadding(new Insets(10));
         this.setSpacing(10);
         this.setAlignment(Pos.CENTER_LEFT);
-        this.getStylesheets().add(getClass().getResource("registrazione.css").toExternalForm());
+        this.getStylesheets().add(getClass().getResource("/css/registrazione.css").toExternalForm());
         this.getStyleClass().add("registrazione-pane");
         // Sezione dati (Nome, Sede, Data)
         VBox infoBox = new VBox();

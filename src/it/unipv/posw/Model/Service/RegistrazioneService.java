@@ -13,8 +13,9 @@ public class RegistrazioneService {
 	}
 
 	public void registraNuovoCliente(Cliente cliente) throws EmptyFieldException, WrongEmailFormatException {
-        // Logica di Business: Esempio di validazione
-        if (cliente.getEmail().isEmpty()) {
+        
+        if (cliente.getNome().isEmpty() || cliente.getCognome().isEmpty() ||cliente.getEmail().isEmpty()
+        	 ||	cliente.getPassword().isEmpty() || cliente.getData_nascita().isEqual(null)) {
             throw new EmptyFieldException();
         }
         

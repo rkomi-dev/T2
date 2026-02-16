@@ -46,6 +46,14 @@ public class NavigazioneController {
     public void apriCarrello() {
     	homeView.setCenter(ViewFactory.getInstance().creaCarrelloView());
     }
+    
+    public void apriAcquisto() {
+    	homeView.setCenter(ViewFactory.getInstance().creaAcquistoView());
+    }
+    
+    public void apriQR() {
+    	homeView.setCenter(ViewFactory.getInstance().creaQrView());
+    }
 }
 
 

@@ -3,7 +3,8 @@ package it.unipv.posw.Model;
 public class Sessione {
 	
 	private static Sessione instance;
-    private Cliente utenteLoggato; // Questo è il "parametro" che cerchi
+    private Cliente utenteLoggato; 
+    private String qr_attuale;
 
     private Sessione() {} // Costruttore privato per il Singleton
 
@@ -28,7 +29,7 @@ public class Sessione {
     public boolean isLoggato() {
         return utenteLoggato != null;
     }
-
+    
     public Cliente getUtenteLoggato() {
         return utenteLoggato;
     }
@@ -37,6 +38,19 @@ public class Sessione {
 		this.utenteLoggato = utenteLoggato;
 	}
     
+	
+    public void setQr_attuale(String qr_attuale) {
+		this.qr_attuale = qr_attuale;
+	}
     
+    
+	public String getQr_attuale() {
+		return qr_attuale;
+	}
+
+	public void svuotaSessione() {
+    	this.utenteLoggato = null;
+    	this.qr_attuale = null;
+    }
 
 }

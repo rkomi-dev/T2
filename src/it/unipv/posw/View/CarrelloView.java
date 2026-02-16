@@ -15,7 +15,7 @@ public class CarrelloView extends VBox {
     public CarrelloView() {
         this.setSpacing(20);
         this.setPadding(new Insets(20));
-        this.getStylesheets().add(getClass().getResource("registrazione.css").toExternalForm());
+        this.getStylesheets().add(getClass().getResource("/css/registrazione.css").toExternalForm());
         this.getStyleClass().add("registrazione-pane");
 
         Label titolo = new Label("Il Tuo Carrello");

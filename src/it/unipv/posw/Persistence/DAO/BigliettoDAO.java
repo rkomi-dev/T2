@@ -55,8 +55,32 @@ public class BigliettoDAO implements IBigliettoDAO {
 		        }
 		} catch(SQLException e) {
 			e.printStackTrace();
+		}finally {
+			DBConnection.getInstance().closeConnection(c);
 		}
 		return risultati;
+	}
+
+	@Override
+	public void updatePostAcquisto(int id_biglietto, String email, String nominativo, String qr) {
+		
+		String query = "UPDATE Biglietto SET email_cliente = ?, nominativo = ?, qr_code = ?, stato = 'acquistato' WHERE id_biglietto = ?";
+		
+		try {
+			c = DBConnection.getInstance().startConnection();
+			PreparedStatement ps = c.prepareStatement(query); 
+			
+			ps.setString(1, email);
+	        ps.setString(2, nominativo);
+	        ps.setString(3, qr);
+	        ps.setInt(4, id_biglietto);
+	        
+	        ps.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBConnection.getInstance().closeConnection(c);
+		}
 	}
 	
 }

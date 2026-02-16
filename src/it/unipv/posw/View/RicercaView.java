@@ -25,8 +25,6 @@ public class RicercaView extends HBox {
         txtRicerca.setPromptText("🔍 Cerca un evento...");
         txtRicerca.setPrefWidth(300);
         
-        // Applichiamo la classe CSS per renderlo tondo
-        txtRicerca.getStyleClass().add("search-field");
         
         this.getChildren().addAll(comboTipoRicerca, txtRicerca);
     }

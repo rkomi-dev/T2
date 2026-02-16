@@ -3,6 +3,7 @@ package it.unipv.posw.Controller;
 import it.unipv.posw.Model.Biglietto;
 import it.unipv.posw.Model.Carrello;
 import it.unipv.posw.View.CarrelloView;
+import javafx.event.ActionEvent;
 
 
 public class CarrelloController {
@@ -16,11 +17,11 @@ public class CarrelloController {
 
         aggiornaDati();
 
-        // 2. Impostiamo le azioni dei bottoni
+        this.view.getBtnPaga().setOnAction(this::vaiAlPagamento);
         
     }
 
-    private void aggiornaDati() {
+    public void aggiornaDati() {
         view.svuotaVista();
         
         for (Biglietto b : carrelloModel.getItems()) {
@@ -29,6 +30,11 @@ public class CarrelloController {
         }
 
         view.setTotale("Totale da pagare: " + carrelloModel.getTotale() + "€");
+    }
+    
+    public void vaiAlPagamento(ActionEvent e) {
+    	
+    	NavigazioneController.getNcontroller().apriAcquisto();
     }
 
 }

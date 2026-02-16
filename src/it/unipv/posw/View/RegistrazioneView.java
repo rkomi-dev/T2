@@ -15,7 +15,7 @@ public class RegistrazioneView extends VBox {
 
     public RegistrazioneView() {
     	
-    	this.getStylesheets().add(getClass().getResource("registrazione.css").toExternalForm());
+    	this.getStylesheets().add(getClass().getResource("/css/registrazione.css").toExternalForm());
         this.getStyleClass().add("registrazione-pane");
         this.setPadding(new Insets(20));
         this.setSpacing(10);

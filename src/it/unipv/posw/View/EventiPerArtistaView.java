@@ -22,7 +22,7 @@ public class EventiPerArtistaView extends VBox {
         this.setSpacing(20);
         this.setPadding(new Insets(20));
         this.setAlignment(Pos.TOP_CENTER);
-        this.getStylesheets().add(getClass().getResource("registrazione.css").toExternalForm());
+        this.getStylesheets().add(getClass().getResource("/css/registrazione.css").toExternalForm());
         this.getStyleClass().add("registrazione-pane");
         // Titolo
         Label lblTitolo = new Label("Eventi per: " + nomeArtista);

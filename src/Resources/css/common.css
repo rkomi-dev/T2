@@ -1,6 +1,6 @@
 /* Definiamo i parametri globali per tutta l'applicazione */
 .root {
-	-fx-background-image: url("sfondo_TicketTwo.png");
+	-fx-background-image: url("/images/sfondo_TicketTwo.png");
 	-fx-background-size: cover;
     
     /* Mantiene l'immagine al centro durante il ridimensionamento */
@@ -11,7 +11,7 @@
     /* Tavolozza Colori */
     -fx-accent-color: #0078d7;       /* Blu TicketTwo */
     -fx-bg-color: #fcfcfc;           /* Grigio chiarissimo */
-    -fx-text-main: #2c3e50;          /* Blu scuro per i testi */
+    -fx-text-main: #2c3e50;         /* Blu scuro per i testi */
     -fx-error-color: #e74c3c;        /* Rosso per errori */
     
     /* Font e testi */
@@ -27,8 +27,10 @@
     -fx-padding: 8 20;
     -fx-background-radius: 4;
     -fx-cursor: hand;
+    -fx-border-color: transparent transparent #2c3e50 transparent; /* Linea sottile sotto ogni bottone */
+    -fx-border-width: 2px;
 }
-.button-primary:hover { -fx-background-color: #005a9e; }
+.button-primary:hover { -fx-background-color: #496a84}
 
 /* Stile per i campi di testo (TextField e PasswordField) */
 .text-input {

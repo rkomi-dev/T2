@@ -52,7 +52,7 @@ public class AutenticazioneView extends VBox {
         // 6. Caricamento dei file CSS
         // Carichiamo prima il comune, poi quello specifico (se esiste)
         try {
-            this.getStylesheets().add(getClass().getResource("autenticazione.css").toExternalForm());
+            this.getStylesheets().add(getClass().getResource("/css/autenticazione.css").toExternalForm());
             //this.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         } catch (Exception e) {
             System.out.println("Nota: Alcuni file CSS non sono stati trovati, uso stile di default.");

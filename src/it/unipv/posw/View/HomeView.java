@@ -16,14 +16,12 @@ public class HomeView extends BorderPane {
     public HBox topBar;
     private RicercaView ricercaView;
     
-    // Label per lo stato del login (in alto a sinistra)
-    //public Label lblStatoUtente = new Label("Ospite");
 
     public HomeView() {
-        // Applichiamo i CSS
-        this.getStylesheets().add(getClass().getResource("common.css").toExternalForm());
+
+        this.getStylesheets().add(getClass().getResource("/css/common.css").toExternalForm());
         this.getStyleClass().add("root");
-        //ricercaView = new RicercaView();
+
         
         // Configurazione Menu
         menuAccount.getItems().addAll(itemHome, itemLogin, itemRegistrati);
@@ -39,8 +37,7 @@ public class HomeView extends BorderPane {
         HBox.setHgrow(spacerSinistra, Priority.ALWAYS);
         HBox.setHgrow(spacerDestra, Priority.ALWAYS);
 
-        // Modifichiamo la topBar per includere la ricerca
-        // Struttura: [Menu] [Molla] [Ricerca] [Molla] [Utente]
+
         topBar = new HBox(menuBar, spacerSinistra,ViewFactory.getInstance().creaRicercaView() , spacerDestra);//, lblStatoUtente);
         topBar.setAlignment(Pos.CENTER);
         topBar.setPadding(new Insets(10));

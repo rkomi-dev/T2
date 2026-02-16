@@ -3,10 +3,12 @@ package it.unipv.posw.Controller;
 import java.util.List;
 
 import it.unipv.posw.Model.Evento;
+import it.unipv.posw.View.AcquistoView;
 import it.unipv.posw.View.AutenticazioneView;
 import it.unipv.posw.View.CarrelloView;
 import it.unipv.posw.View.EventiPerArtistaView;
 import it.unipv.posw.View.EventoView;
+import it.unipv.posw.View.QRView;
 import it.unipv.posw.View.RegistrazioneView;
 import it.unipv.posw.View.RicercaView;
 
@@ -62,6 +64,18 @@ public class ViewFactory {
     public CarrelloView creaCarrelloView() {
     	CarrelloView view = new CarrelloView();
     	new CarrelloController(view);
+    	return view;
+    }
+    
+    public AcquistoView creaAcquistoView() {
+    	AcquistoView view = new AcquistoView();
+    	new AcquistoController(view);
+    	return view;
+    }
+    
+    public QRView creaQrView() {
+    	QRView view = new QRView();
+    	new QRController(view);
     	return view;
     }
 }
