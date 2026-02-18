@@ -2,17 +2,17 @@
 CREATE DATABASE IF NOT EXISTS TicketTwo;
 USE TicketTwo;
 
--- 1. Tabella Utente (MySQL 8.4 supporta pienamente VARCHAR e indici standard)
+-- 1. Tabella Utente (Indipendente)
 CREATE TABLE Utente (
-	nome VARCHAR(100) NOT NULL,
-	cognome VARCHAR(100) NOT NULL,
-    email VARCHAR(191) PRIMARY KEY, -- 191 è ottimale per indici UTF8MB4
+    nome VARCHAR(100) NOT NULL,
+    cognome VARCHAR(100) NOT NULL,
+    email VARCHAR(191) PRIMARY KEY, 
     password VARCHAR(255) NOT NULL,
     data_nascita DATE NOT NULL,
     nome_organizzazione VARCHAR(255) DEFAULT NULL 
 ) ENGINE=InnoDB;
 
--- 2. Tabella Sede
+-- 2. Tabella Sede (Indipendente)
 CREATE TABLE Sede (
     id_sede INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -20,7 +20,13 @@ CREATE TABLE Sede (
     CONSTRAINT unique_sede UNIQUE(nome, indirizzo)
 ) ENGINE=InnoDB;
 
--- 3. Tabella Settore
+-- 3. Tabella Artista (Indipendente - Spostata qui per permettere il riferimento in Evento)
+CREATE TABLE Artista (
+    id_artista INT AUTO_INCREMENT PRIMARY KEY,
+    nome_darte VARCHAR(100) NOT NULL
+) ENGINE=InnoDB;
+
+-- 4. Tabella Settore (Dipende da Sede)
 CREATE TABLE Settore (
     id_settore INT AUTO_INCREMENT PRIMARY KEY,
     id_sede INT NOT NULL,
@@ -31,7 +37,7 @@ CREATE TABLE Settore (
         REFERENCES Sede(id_sede) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 4. Tabella Posto
+-- 5. Tabella Posto (Dipende da Settore)
 CREATE TABLE Posto (
     id_posto INT AUTO_INCREMENT PRIMARY KEY,
     id_settore INT NOT NULL,
@@ -42,7 +48,7 @@ CREATE TABLE Posto (
         REFERENCES Settore(id_settore) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 5. Tabella Evento
+-- 6. Tabella Evento (Dipende da Sede, Utente e Artista)
 CREATE TABLE Evento (
     id_evento INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -56,25 +62,23 @@ CREATE TABLE Evento (
     CONSTRAINT fk_evento_organizzatore FOREIGN KEY (email_organizzatore) 
         REFERENCES Utente(email),
     CONSTRAINT fk_evento_artista FOREIGN KEY (id_artista) 
-    	REFERENCES Artista(id_artista)
+        REFERENCES Artista(id_artista)
 ) ENGINE=InnoDB;
 
--- 6. Tabella Tariffa
+-- 7. Tabella Tariffa (Dipende da Evento e Settore)
 CREATE TABLE Tariffa (
     id_tariffa INT AUTO_INCREMENT PRIMARY KEY,
     id_evento INT NOT NULL,
     tipologia_biglietto ENUM('VIP', 'STANDARD', 'VISIBILITA_LIMITATA') NOT NULL,
-    prezzo_base DECIMAL(10,2) NOT NULL,
-    categoria_sconto VARCHAR(50), 
     prezzo_finale DECIMAL(10,2) NOT NULL,
     id_settore INT,
     CONSTRAINT fk_tariffa_evento FOREIGN KEY (id_evento) 
-        REFERENCES Evento(id_evento) ON DELETE CASCADE
+        REFERENCES Evento(id_evento) ON DELETE CASCADE,
     CONSTRAINT fk_tariffa_settore FOREIGN KEY (id_settore)
-    	REFERENCES Settore(id_settore)
+        REFERENCES Settore(id_settore)
 ) ENGINE=InnoDB;
 
--- 7. Tabella Biglietto
+-- 8. Tabella Biglietto (Dipende da Evento, Posto, Settore e Utente)
 CREATE TABLE Biglietto (
     id_biglietto INT AUTO_INCREMENT PRIMARY KEY,
     id_evento INT NOT NULL,
@@ -89,10 +93,3 @@ CREATE TABLE Biglietto (
     CONSTRAINT fk_biglietto_settore FOREIGN KEY (id_settore) REFERENCES Settore(id_settore),
     CONSTRAINT fk_biglietto_cliente FOREIGN KEY (email_cliente) REFERENCES Utente(email)
 ) ENGINE=InnoDB;
-
-CREATE TABLE Artista (
-	id_artista INT AUTO_INCREMENT PRIMARY KEY,
-	nome_darte VARCHAR(100) NOT NULL
-) ENGINE=InnoDB;
-
-
