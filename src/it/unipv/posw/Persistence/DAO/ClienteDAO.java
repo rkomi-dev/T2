@@ -15,53 +15,74 @@ public class ClienteDAO implements IClienteDAO {
 	
 	public ClienteDAO() {
 	}
-
+	@Override
+	public boolean isEmailEsistente(String email) {
+		PreparedStatement ps;
+		ResultSet rs;
+		String query = "SELECT COUNT(*) FROM Utente WHERE email = ?";
+		
+		try {
+			c = DBConnection.getInstance().startConnection();
+			ps = c.prepareStatement(query);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getInt(1) > 0;
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+	        DBConnection.getInstance().closeConnection(c);
+	    }
+		return false;
+	}
+	
+	
 	@Override
     public boolean salvaCliente(Cliente cliente) {
-        PreparedStatement pstmt = null;
+        PreparedStatement ps;
         String query = "INSERT INTO Utente (nome, cognome, email, password, data_nascita) VALUES (?, ?, ?, ?, ?)";
 
         try {
-            // Utilizziamo il tuo metodo startConnection
+        	
             c = DBConnection.getInstance().startConnection();
-            
-            if (c == null) return false;
 
-            pstmt = c.prepareStatement(query);
+            ps = c.prepareStatement(query);
     
-            pstmt.setString(1, cliente.getNome());
-            pstmt.setString(2, cliente.getCognome());
-            pstmt.setString(3, cliente.getEmail());
-            pstmt.setString(4, cliente.getPassword());
-            pstmt.setDate(5, java.sql.Date.valueOf(cliente.getData_nascita()));
+            ps.setString(1, cliente.getNome());
+            ps.setString(2, cliente.getCognome());
+            ps.setString(3, cliente.getEmail());
+            ps.setString(4, cliente.getPassword());
+            ps.setDate(5, java.sql.Date.valueOf(cliente.getData_nascita()));
 
-            int result = pstmt.executeUpdate();
-            DBConnection.getInstance().closeConnection(c);
+            int result = ps.executeUpdate();
             return result > 0; // Ritorna true se l'inserimento è riuscito
 
         } catch (SQLException e) {
             System.err.println("Errore durante la registrazione: " + e.getMessage());
-            return false;
+
         } finally {
             DBConnection.getInstance().closeConnection(c);
         }
-          
+        return false;  
     }
     
     
 	@Override
     public Cliente trovaClientePerEmail(String email) {
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        PreparedStatement ps;
+        ResultSet rs;
         Cliente cliente = null;
 
         String query = "SELECT * FROM Utente WHERE email = ?";
 
         try {
             c = DBConnection.getInstance().startConnection();
-            pstmt = c.prepareStatement(query);
-            pstmt.setString(1, email);
-            rs = pstmt.executeQuery();
+            ps = c.prepareStatement(query);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
 
             if (rs.next()) {
                 // Se lo trovo, costruisco l'oggetto Cliente
@@ -81,4 +102,27 @@ public class ClienteDAO implements IClienteDAO {
         }
         return cliente;
     }
+	
+	@Override
+	public boolean deleteCliente(String email) {
+		
+		PreparedStatement ps;
+	    String query = "DELETE FROM Utente WHERE email = ?";
+
+	    try {
+	        c = DBConnection.getInstance().startConnection();
+	        ps = c.prepareStatement(query);
+	        ps.setString(1, email);
+	        
+	        int result = ps.executeUpdate();
+	        return result > 0; 
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        DBConnection.getInstance().closeConnection(c);
+	    }
+	    
+        return false;
+	}
+
 }

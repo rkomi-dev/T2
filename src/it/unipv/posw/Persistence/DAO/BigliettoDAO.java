@@ -21,6 +21,7 @@ public class BigliettoDAO implements IBigliettoDAO {
 	public List<Biglietto> getBigliettiDisponibili(int idEvento, String tipo, int quantita) {
 		
 		List<Biglietto> risultati = new ArrayList<>();
+		PreparedStatement ps;
 		String query = "SELECT b.*, t.prezzo_finale, t.tipologia_biglietto " +
                 "FROM Biglietto b " +
                 "JOIN Tariffa t ON b.id_evento = t.id_evento AND b.id_settore = t.id_settore " +
@@ -31,7 +32,7 @@ public class BigliettoDAO implements IBigliettoDAO {
 		
 		try {
 			c = DBConnection.getInstance().startConnection();
-			PreparedStatement ps = c.prepareStatement(query); 
+			ps = c.prepareStatement(query); 
 		        
 		        ps.setInt(1, idEvento);
 		        ps.setString(2, tipo);
@@ -64,11 +65,12 @@ public class BigliettoDAO implements IBigliettoDAO {
 	@Override
 	public void updatePostAcquisto(int id_biglietto, String email, String nominativo, String qr) {
 		
+		PreparedStatement ps;
 		String query = "UPDATE Biglietto SET email_cliente = ?, nominativo = ?, qr_code = ?, stato = 'acquistato' WHERE id_biglietto = ?";
 		
 		try {
 			c = DBConnection.getInstance().startConnection();
-			PreparedStatement ps = c.prepareStatement(query); 
+			ps = c.prepareStatement(query); 
 			
 			ps.setString(1, email);
 	        ps.setString(2, nominativo);

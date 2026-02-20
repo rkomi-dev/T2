@@ -22,14 +22,14 @@ public class ArtistaDAO implements IArtistaDAO {
 	@Override
 	public List<Artista> trovaArtisti(String parziale) {
 		List<Artista> risultati = new ArrayList<>();
-	    // Usiamo la nuova tabella Artista
+		PreparedStatement ps;
 	    String query = "SELECT * FROM Artista WHERE nome_darte LIKE ?";
 
 	    try {
 	        c = DBConnection.getInstance().startConnection();
-	        PreparedStatement pstmt = c.prepareStatement(query);
-	        pstmt.setString(1, parziale + "%");
-	        ResultSet rs = pstmt.executeQuery();
+	        ps = c.prepareStatement(query);
+	        ps.setString(1, parziale + "%");
+	        ResultSet rs = ps.executeQuery();
 
 	        while (rs.next()) {
 	            // Creiamo l'oggetto Artista con i dati dal DB

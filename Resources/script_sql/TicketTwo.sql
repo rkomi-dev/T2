@@ -10,6 +10,7 @@ CREATE TABLE Utente (
     password VARCHAR(255) NOT NULL,
     data_nascita DATE NOT NULL,
     nome_organizzazione VARCHAR(255) DEFAULT NULL 
+    CONSTRAINT unique_email UNIQUE(email)
 ) ENGINE=InnoDB;
 
 -- 2. Tabella Sede (Indipendente)

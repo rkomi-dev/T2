@@ -6,14 +6,14 @@ import it.unipv.posw.Persistence.DAO.ClienteDAO;
 
 public class AutenticazioneService {
 	
-	private ClienteDAO clienteDAO;
+	private ClienteDAO dao;
 
 	public AutenticazioneService() {
-		this.clienteDAO = new ClienteDAO();
+		this.dao = new ClienteDAO();
 	}
 
 	public Cliente login(String email, String password) throws CredenzialiErrateException {
-	    Cliente cliente = clienteDAO.trovaClientePerEmail(email);
+	    Cliente cliente = dao.trovaClientePerEmail(email);
 	    
 	    if(cliente == null || !cliente.getEmail().equals(email) || !cliente.getPassword().equals(password)) {
 	    	throw new CredenzialiErrateException();

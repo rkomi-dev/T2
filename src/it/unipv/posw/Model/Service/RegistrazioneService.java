@@ -1,21 +1,22 @@
 package it.unipv.posw.Model.Service;
 
+import it.unipv.posw.Exception.EmailEsistenteException;
 import it.unipv.posw.Exception.EmptyFieldException;
 import it.unipv.posw.Exception.WrongEmailFormatException;
 import it.unipv.posw.Model.Cliente;
 import it.unipv.posw.Persistence.DAO.ClienteDAO;
 
 public class RegistrazioneService {
-    private ClienteDAO clienteDAO;
+    private ClienteDAO dao;
     
 	public RegistrazioneService() {
-		this.clienteDAO = new ClienteDAO();
+		this.dao = new ClienteDAO();
 	}
 
-	public void registraNuovoCliente(Cliente cliente) throws EmptyFieldException, WrongEmailFormatException {
+	public boolean registraNuovoCliente(Cliente cliente) throws EmptyFieldException, WrongEmailFormatException, EmailEsistenteException {
         
         if (cliente.getNome().isEmpty() || cliente.getCognome().isEmpty() ||cliente.getEmail().isEmpty()
-        	 ||	cliente.getPassword().isEmpty() || cliente.getData_nascita().isEqual(null)) {
+        	 ||	cliente.getPassword().isEmpty() || cliente.getData_nascita() == null) {
             throw new EmptyFieldException();
         }
         
@@ -23,7 +24,12 @@ public class RegistrazioneService {
         	throw new WrongEmailFormatException();
         }
         
-        clienteDAO.salvaCliente(cliente);
+        if(dao.isEmailEsistente(cliente.getEmail())) {
+        	throw new EmailEsistenteException();
+        }
+        
+        dao.salvaCliente(cliente);
+        return true;
        
     }
 }

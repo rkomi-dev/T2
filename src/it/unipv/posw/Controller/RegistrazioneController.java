@@ -1,5 +1,6 @@
 package it.unipv.posw.Controller;
 
+import it.unipv.posw.Exception.EmailEsistenteException;
 import it.unipv.posw.Exception.EmptyFieldException;
 import it.unipv.posw.Exception.WrongEmailFormatException;
 import it.unipv.posw.Model.Cliente;
@@ -40,7 +41,9 @@ public class RegistrazioneController {
         	AlertView.mostraErrore(ex.getMessage());
         }catch (WrongEmailFormatException ex) {
         	AlertView.mostraErrore(ex.getMessage());
-        }
+        }catch (EmailEsistenteException ex) {
+			AlertView.mostraErrore(ex.getMessage());
+		}
 
        
     }
