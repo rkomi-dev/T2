@@ -1,5 +1,0 @@
-Factory: view, pagamento 
-Singleton: DBconnection, Navigatore, Carrello, Sessione
-Strategy: ricerca
-Adapter: PayPal, Mastercard
-DAO
