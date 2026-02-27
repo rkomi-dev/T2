@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.unipv.posw.Model.Evento;
 import it.unipv.posw.View.AcquistoView;
+import it.unipv.posw.View.AreaRiservataView;
 import it.unipv.posw.View.AutenticazioneView;
 import it.unipv.posw.View.CarrelloView;
 import it.unipv.posw.View.EventiPerArtistaView;
@@ -76,6 +77,12 @@ public class ViewFactory {
     public QRView creaQrView() {
     	QRView view = new QRView();
     	new QRController(view);
+    	return view;
+    }
+    
+    public AreaRiservataView creaAreaRiservataView() {
+    	AreaRiservataView view = new AreaRiservataView();
+    	new AreaRiservataController(view);
     	return view;
     }
 }

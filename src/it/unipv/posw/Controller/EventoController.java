@@ -32,11 +32,10 @@ public class EventoController {
             return; 
         }
 
-        // Recupero dati dalla View
+
         String tipoScelto = view.getComboBiglietti().getValue();
         int quantita = Integer.parseInt(view.getComboQuantita().getValue());
 
-        // Esecuzione logica tramite Service
         try {
         	service.aggiungiAlCarrello(evento.getId_evento(), tipoScelto, quantita);
         }catch (IndisponibilitàException ex) {

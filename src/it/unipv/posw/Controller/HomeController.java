@@ -1,5 +1,6 @@
 package it.unipv.posw.Controller;
 
+import it.unipv.posw.Model.Sessione;
 import it.unipv.posw.View.HomeView;
 import javafx.event.ActionEvent;
 
@@ -15,6 +16,7 @@ public class HomeController {
         view.itemHome.setOnAction(this::handleHome);
         view.itemLogin.setOnAction(this::handleLogin);
         view.itemRegistrati.setOnAction(this::handleRegistrazione);
+        view.itemAreaRis.setOnAction(this::handleAreaRiservata);
         
     }
     
@@ -23,10 +25,19 @@ public class HomeController {
     }
     
     public void handleLogin(ActionEvent e) {
-    	NavigazioneController.getNcontroller().apriLogin();;
+    	NavigazioneController.getNcontroller().apriLogin();
     }
     
     public void handleRegistrazione(ActionEvent e) {
-    	NavigazioneController.getNcontroller().apriRegistrazione();;
+    	NavigazioneController.getNcontroller().apriRegistrazione();
+    }
+    
+    public void handleAreaRiservata(ActionEvent e) {
+    	
+    	if(!Sessione.getInstance().isLoggato()) {
+    		NavigazioneController.getNcontroller().apriLogin();
+    		return;
+    	}
+    	NavigazioneController.getNcontroller().apriAreaRiservata();
     }
 }

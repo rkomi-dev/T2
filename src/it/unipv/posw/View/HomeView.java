@@ -13,6 +13,7 @@ public class HomeView extends BorderPane {
     public MenuItem itemHome = new MenuItem("Home");
     public MenuItem itemLogin = new MenuItem("Login cliente");
     public MenuItem itemRegistrati = new MenuItem("Registrati");
+    public MenuItem itemAreaRis = new MenuItem("Area riservata");
     public HBox topBar;
     private RicercaView ricercaView;
     
@@ -24,13 +25,13 @@ public class HomeView extends BorderPane {
 
         
         // Configurazione Menu
-        menuAccount.getItems().addAll(itemHome, itemLogin, itemRegistrati);
+        menuAccount.getItems().addAll(itemHome, itemLogin, itemRegistrati, itemAreaRis);
         menuBar.getMenus().add(menuAccount);
         
         itemHome.getStyleClass().add("button-primary");
         itemLogin.getStyleClass().add("button-primary");
         itemRegistrati.getStyleClass().add("button-primary");
-        
+        itemAreaRis.getStyleClass().add("button-primary");
         
         Region spacerSinistra = new Region();
         Region spacerDestra = new Region();
@@ -38,11 +39,10 @@ public class HomeView extends BorderPane {
         HBox.setHgrow(spacerDestra, Priority.ALWAYS);
 
 
-        topBar = new HBox(menuBar, spacerSinistra,ViewFactory.getInstance().creaRicercaView() , spacerDestra);//, lblStatoUtente);
+        topBar = new HBox(menuBar, spacerSinistra,ViewFactory.getInstance().creaRicercaView() , spacerDestra);
         topBar.setAlignment(Pos.CENTER);
         topBar.setPadding(new Insets(10));
         
-        //this.setTop(topBar);
         topBar.setStyle("-fx-padding: 10; -fx-background-color: white; -fx-alignment: CENTER_LEFT;");
         
         this.setTop(topBar);

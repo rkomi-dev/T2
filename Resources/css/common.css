@@ -21,7 +21,7 @@
 
 /* Stile per tutti i bottoni principali del progetto */
 .button-primary {
-    -fx-background-color: #0078d4;
+    -fx-background-color: #ffdb58;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-padding: 8 20;

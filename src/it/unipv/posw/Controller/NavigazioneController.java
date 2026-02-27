@@ -54,6 +54,10 @@ public class NavigazioneController {
     public void apriQR() {
     	homeView.setCenter(ViewFactory.getInstance().creaQrView());
     }
+    
+    public void apriAreaRiservata() {
+    	homeView.setCenter(ViewFactory.getInstance().creaAreaRiservataView());
+    }
 }
 
 

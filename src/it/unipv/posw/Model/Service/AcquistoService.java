@@ -1,7 +1,10 @@
 package it.unipv.posw.Model.Service;
 
+import java.util.List;
+
 import it.unipv.posw.Model.Biglietto;
 import it.unipv.posw.Model.Carrello;
+import it.unipv.posw.Model.RiepilogoAcquisto;
 import it.unipv.posw.Model.Sessione;
 import it.unipv.posw.Model.Service.Payment.IPagamento;
 import it.unipv.posw.Persistence.DAO.BigliettoDAO;
@@ -40,6 +43,11 @@ public class AcquistoService {
 			throw new Exception();
 		}
 		
+	}
+	
+	public List<RiepilogoAcquisto> storicoAcquisti(String email) {
+	
+		return dao.getBigliettiAcquistati(email);
 	}
 	
 	

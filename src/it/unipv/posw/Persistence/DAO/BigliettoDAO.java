@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unipv.posw.Model.Biglietto;
+import it.unipv.posw.Model.RiepilogoAcquisto;
 import it.unipv.posw.Persistence.DBConnection;
 import it.unipv.posw.Persistence.DAO.Interface.IBigliettoDAO;
 
@@ -83,6 +84,39 @@ public class BigliettoDAO implements IBigliettoDAO {
 		}finally {
 			DBConnection.getInstance().closeConnection(c);
 		}
+	}
+
+	@Override
+	public List<RiepilogoAcquisto> getBigliettiAcquistati(String email) {
+		
+		List<RiepilogoAcquisto> risultati = new ArrayList<>();
+		PreparedStatement ps;
+		String query = "SELECT e.nome, e.data_ora, b.nominativo, b.qr_code, t.prezzo_finale " +
+                "FROM Biglietto b " +
+                "JOIN Evento e ON b.id_evento = e.id_evento " +
+                "JOIN Tariffa t ON e.id_evento = t.id_evento AND b.id_settore = t.id_settore " +
+                "WHERE b.email_cliente = ? AND b.stato = 'acquistato'";
+		
+		try {
+			c = DBConnection.getInstance().startConnection();
+			ps = c.prepareStatement(query);
+			
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+	            risultati.add(new RiepilogoAcquisto(
+	                rs.getString("nome"),
+	                rs.getTimestamp("data_ora").toLocalDateTime(),
+	                rs.getString("nominativo"),
+	                rs.getDouble("prezzo_finale")
+	            ));
+	        }
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return risultati;
 	}
 	
 }
